@@ -1,0 +1,16 @@
+[package]
+name = "module"
+version.workspace = true
+edition.workspace = true
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+relib_interface = { version = "0", features = ["include"] }
+relib_module = "0"
+shared = { version = "0.1.0", path = "../shared" }
+
+[build-dependencies]
+relib_interface = { version = "0", features = ["build"] }
+shared = { version = "0.1.0", path = "../shared" }
