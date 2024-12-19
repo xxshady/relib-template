@@ -1,5 +1,3 @@
 # relib-template
 
-How to use:
-- `cargo build --workspace` (build host and module)
-- `cargo run` (run host)
+Use `cargo run` to compile host and module and run host binary.
