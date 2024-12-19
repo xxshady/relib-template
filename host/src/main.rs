@@ -10,7 +10,7 @@ impl shared::imports::Imports for gen_imports::ModuleImportsImpl {
 fn main() {
     // replace "?" with your file name, for example if you named module crate as "module"
     // on linux the path will be "target/debug/libmodule.so", on windows it will be "target/debug/module.dll"
-    let path_to_dylib = "target/debug/libmodule.so";
+    let path_to_dylib = "target/debug/?";
 
     let module = relib_host::load_module::<gen_exports::ModuleExports>(
         path_to_dylib,
