@@ -1,3 +1,5 @@
 # relib-template
 
-Use `cargo run` to compile host and module and run host binary.
+Template of [`relib`](https://github.com/xxshady/relib).
+
+Use `cargo run` to compile host, module crates and run host binary.
