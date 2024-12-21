@@ -10,10 +10,10 @@ crate-type = ["cdylib"]
 unloading = ["relib_module/unloading"]
 
 [dependencies]
-relib_interface = { version = "0", features = ["include"], path = "../../relib/interface" }
-relib_module = { version = "0", path = "../../relib/module" }
+relib_interface = { version = "0", features = ["include"] }
+relib_module = { version = "0" }
 shared = { version = "0.1.0", path = "../shared" }
 
 [build-dependencies]
-relib_interface = { version = "0", features = ["build"], path = "../../relib/interface" }
+relib_interface = { version = "0", features = ["build"] }
 shared = { version = "0.1.0", path = "../shared" }

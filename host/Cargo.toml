@@ -8,10 +8,10 @@ unloading = ["relib_host/unloading"]
 
 [dependencies]
 libloading = "0.8.6"
-relib_host = { version = "0", path = "../../relib/host" }
-relib_interface = { version = "0", features = ["include"], path = "../../relib/interface" }
+relib_host = { version = "0" }
+relib_interface = { version = "0", features = ["include"] }
 shared = { version = "0.1.0", path = "../shared" }
 
 [build-dependencies]
-relib_interface = { version = "0", features = ["build"], path = "../../relib/interface" }
+relib_interface = { version = "0", features = ["build"] }
 shared = { version = "0.1.0", path = "../shared" }
