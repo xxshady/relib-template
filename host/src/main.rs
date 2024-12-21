@@ -8,15 +8,19 @@ impl shared::imports::Imports for gen_imports::ModuleImportsImpl {
 }
 
 fn main() {
-    // replace "?" with your file name, for example if you named module crate as "module"
-    // on linux the path will be "target/debug/libmodule.so", on windows it will be "target/debug/module.dll"
-    let path_to_dylib = "target/debug/?";
+    let path_to_dylib = if cfg!(target_os = "linux") {
+        "target/debug/libmodule.so"
+    } else {
+        "target/debug/module.dll"
+    };
 
     let module = relib_host::load_module::<gen_exports::ModuleExports>(
         path_to_dylib,
         gen_imports::init_imports,
     )
-    .unwrap();
+    .unwrap_or_else(|e| {
+        panic!("module loading failed: {e:#}");
+    });
 
     // main function is unsafe to call (as well as any other module export) because these preconditions are not checked by relib:
     // 1. returned value must be actually `R` at runtime. For example if you called this function with type bool but module returns i32, UB will occur.
