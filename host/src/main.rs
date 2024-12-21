@@ -40,7 +40,13 @@ fn main() {
     let bar_value = unsafe { module.exports().bar() }.unwrap();
     dbg!(bar_value);
 
-    module.unload().unwrap_or_else(|e| {
-        panic!("module unloading failed: {e:#}");
-    });
+    // module.unload() is provided when unloading feature of relib_host crate is enabled
+    #[cfg(feature = "unloading")]
+    {
+        println!("unloading feature is enabled, calling module unload");
+
+        module.unload().unwrap_or_else(|e| {
+            panic!("module unloading failed: {e:#}");
+        });
+    }
 }

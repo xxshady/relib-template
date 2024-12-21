@@ -6,11 +6,14 @@ edition.workspace = true
 [lib]
 crate-type = ["cdylib"]
 
+[features]
+unloading = ["relib_module/unloading"]
+
 [dependencies]
-relib_interface = { version = "0", features = ["include"] }
-relib_module = "0"
+relib_interface = { version = "0", features = ["include"], path = "../../relib/interface" }
+relib_module = { version = "0", path = "../../relib/module" }
 shared = { version = "0.1.0", path = "../shared" }
 
 [build-dependencies]
-relib_interface = { version = "0", features = ["build"] }
+relib_interface = { version = "0", features = ["build"], path = "../../relib/interface" }
 shared = { version = "0.1.0", path = "../shared" }

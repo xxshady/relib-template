@@ -3,12 +3,15 @@ name = "host"
 version.workspace = true
 edition.workspace = true
 
+[features]
+unloading = ["relib_host/unloading"]
+
 [dependencies]
 libloading = "0.8.6"
-relib_host = "0"
-relib_interface = { version = "0", features = ["include"] }
+relib_host = { version = "0", path = "../../relib/host" }
+relib_interface = { version = "0", features = ["include"], path = "../../relib/interface" }
 shared = { version = "0.1.0", path = "../shared" }
 
 [build-dependencies]
-relib_interface = { version = "0", features = ["build"] }
+relib_interface = { version = "0", features = ["build"], path = "../../relib/interface" }
 shared = { version = "0.1.0", path = "../shared" }
