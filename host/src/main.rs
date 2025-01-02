@@ -25,6 +25,7 @@ fn main() {
     // main function is unsafe to call (as well as any other module export) because these preconditions are not checked by relib:
     // 1. returned value must be actually `R` at runtime. For example if you called this function with type bool but module returns i32, UB will occur.
     // 2. type of return value must be FFI-safe.
+    // 3. returned value must not be a reference-counting pointer (see limitations on main docs page/README).
     let returned_value = unsafe { module.call_main::<()>() };
 
     // if module panics while executing any export it returns None
@@ -37,6 +38,7 @@ fn main() {
     // 1. types of arguments and return value must be FFI-safe
     //    (you can use abi_stable or stabby crate for it, see "abi_stable_usage" example).
     // 2. host and module crates must be compiled with same shared crate code.
+    // 3. returned value must not be a reference-counting pointer (see limitations on main docs page/README).
     let bar_value = unsafe { module.exports().bar() }.unwrap();
     dbg!(bar_value);
 
