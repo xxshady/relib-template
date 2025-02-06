@@ -14,11 +14,13 @@ fn main() {
         "target/debug/module.dll"
     };
 
-    let module = relib_host::load_module::<gen_exports::ModuleExports>(
-        path_to_dylib,
-        gen_imports::init_imports,
-    )
-    .unwrap_or_else(|e| {
+    let module = unsafe {
+        relib_host::load_module::<gen_exports::ModuleExports>(
+            path_to_dylib,
+            gen_imports::init_imports,
+        )
+    };
+    let module = module.unwrap_or_else(|e| {
         panic!("module loading failed: {e:#}");
     });
 
