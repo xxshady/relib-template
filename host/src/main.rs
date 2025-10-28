@@ -1,3 +1,5 @@
+use {libloading::library_filename, std::path::Path};
+
 relib_interface::include_exports!();
 relib_interface::include_imports!();
 
@@ -8,14 +10,10 @@ impl shared::imports::Imports for gen_imports::ModuleImportsImpl {
 }
 
 fn main() {
-  let path_to_dylib = if cfg!(target_os = "linux") {
-    "target/debug/libmodule.so"
-  } else {
-    "target/debug/module.dll"
-  };
+  let dylib_path = Path::new("target/debug").join(library_filename("module"));
 
   let module = unsafe {
-    relib_host::load_module::<gen_exports::ModuleExports>(path_to_dylib, gen_imports::init_imports)
+    relib_host::load_module::<gen_exports::ModuleExports>(dylib_path, gen_imports::init_imports)
   };
   let module = module.unwrap_or_else(|e| {
     panic!("module loading failed: {e:#}");
